@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Noba.CarRental.Application.Exceptions;
-using Noba.CarRental.Domain.UnitOfWork;
+using Noba.CarRental.Application.Persistence;
 
 namespace Noba.CarRental.Application.Features.RegisterCarReturn
 {

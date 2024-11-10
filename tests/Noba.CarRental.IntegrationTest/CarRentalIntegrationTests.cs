@@ -4,9 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Noba.CarRental.Application;
 using Noba.CarRental.Application.Features.RegisterCarPickup;
 using Noba.CarRental.Application.Features.RegisterCarReturn;
+using Noba.CarRental.Application.Persistence;
 using Noba.CarRental.Domain.Entities;
+using Noba.CarRental.Domain.Entities.CarCategory;
 using Noba.CarRental.Domain.Enums;
-using Noba.CarRental.Domain.UnitOfWork;
 using Noba.CarRental.Persistance;
 
 namespace Noba.CarRental.IntegrationTest
@@ -95,7 +96,7 @@ namespace Noba.CarRental.IntegrationTest
         private async Task AddMockCarAndCategoryData(IUnitOfWork unitOfWork)
         {
             // Add Small Car
-            var smallCategory = CarCategory.Create(SmallCarCategoryId, CarCategoryType.Small, 10, 10);
+            var smallCategory = MockCarCategory(SmallCarCategoryId, CarCategoryType.Small, 10, 10);
             await unitOfWork.CarCategoryRepository.AddAsync(smallCategory);
 
             var smallCar = Car.Create(Guid.NewGuid(), SmallCarNumber, smallCategory, InitialMeterReading);
@@ -103,20 +104,25 @@ namespace Noba.CarRental.IntegrationTest
 
 
             // Add Combi Category
-            var combiCategory = CarCategory.Create(CombiCategoryId, CarCategoryType.Combi, 20, 20);
+            var combiCategory = MockCarCategory(CombiCategoryId, CarCategoryType.Combi, 20, 20);
             await unitOfWork.CarCategoryRepository.AddAsync(combiCategory);
 
             var combiCar = Car.Create(Guid.NewGuid(), CombiCarNumber, combiCategory, InitialMeterReading);
             await unitOfWork.CarRepository.AddAsync(combiCar);
 
             // Add Truck Category
-            var truckCategory = CarCategory.Create(TruckCategoryId, CarCategoryType.Truck, 30, 30);
+            var truckCategory = MockCarCategory(TruckCategoryId, CarCategoryType.Truck, 30, 30);
             await unitOfWork.CarCategoryRepository.AddAsync(truckCategory);
 
             var truckCar = Car.Create(Guid.NewGuid(), TruckCarNumber, truckCategory, InitialMeterReading);
             await unitOfWork.CarRepository.AddAsync(truckCar);
 
             await unitOfWork.CommitAsync();
+        }
+
+        private CarCategory MockCarCategory(Guid id, CarCategoryType carCategoryType, decimal baseDayRental, decimal baseKmPrice)
+        {
+            return CarCategory.Create(id, carCategoryType, new Pricing(baseDayRental, baseKmPrice));
         }
     }
 }

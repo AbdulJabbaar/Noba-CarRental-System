@@ -1,6 +1,5 @@
-﻿using Noba.CarRental.Domain.Entities;
-using Noba.CarRental.Domain.Repositories;
-using Noba.CarRental.Domain.UnitOfWork;
+﻿using Noba.CarRental.Application.Persistence;
+using Noba.CarRental.Domain.Entities.CarCategory;
 
 namespace Noba.CarRental.Persistance.UnitOfWork
 {

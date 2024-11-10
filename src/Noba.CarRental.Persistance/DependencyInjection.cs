@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Noba.CarRental.Domain.Entities;
-using Noba.CarRental.Domain.Repositories;
-using Noba.CarRental.Domain.UnitOfWork;
+using Noba.CarRental.Application.Persistence;
+using Noba.CarRental.Domain.Entities.CarCategory;
 using Noba.CarRental.Persistance.Repositories;
 using Noba.CarRental.Persistance.UnitOfWork;
 

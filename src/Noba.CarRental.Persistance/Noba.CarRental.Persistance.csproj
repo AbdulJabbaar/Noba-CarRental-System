@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Noba.CarRental.Application\Noba.CarRental.Application.csproj" />
     <ProjectReference Include="..\Noba.CarRental.Domain\Noba.CarRental.Domain.csproj" />
   </ItemGroup>
 

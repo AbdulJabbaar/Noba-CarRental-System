@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Noba.CarRental.Domain.Entities;
+using Noba.CarRental.Domain.Entities.CarCategory;
 using Noba.CarRental.Domain.Enums;
 
 namespace Noba.CarRental.UnitTests.Domain.Entities
@@ -16,14 +16,14 @@ namespace Noba.CarRental.UnitTests.Domain.Entities
             decimal baseKmPrice = 10;
 
             // Act
-            var carCategory = CarCategory.Create(id, categoryType, baseDayRental, baseKmPrice);
+            var carCategory = CreateCarCategoryMock(id, categoryType, baseDayRental, baseKmPrice);
 
             // Assert
             carCategory.Should().NotBeNull();
             carCategory.Id.Should().Be(id);
             carCategory.CategoryType.Should().Be(categoryType);
-            carCategory.BaseDayRental.Should().Be(baseDayRental);
-            carCategory.BaseKmPrice.Should().Be(baseKmPrice);
+            carCategory.Pricing.BaseDayRental.Should().Be(baseDayRental);
+            carCategory.Pricing.BaseKmPrice.Should().Be(baseKmPrice);
         }
 
         [Fact]
@@ -33,10 +33,10 @@ namespace Noba.CarRental.UnitTests.Domain.Entities
             var id = Guid.NewGuid();
 
             // Act & Assert
-            var act = () => CarCategory.Create(id, CarCategoryType.Small, 0, 10);
+            var act = () => CreateCarCategoryMock(id, CarCategoryType.Small, 0, 10);
             act.Should().Throw<ArgumentException>().WithMessage("Base day rental must be greater than zero.");
 
-            act = () => CarCategory.Create(id, CarCategoryType.Small, -1, 10);
+            act = () => CreateCarCategoryMock(id, CarCategoryType.Small, -1, 10);
             act.Should().Throw<ArgumentException>().WithMessage("Base day rental must be greater than zero.");
         }
 
@@ -47,8 +47,13 @@ namespace Noba.CarRental.UnitTests.Domain.Entities
             var id = Guid.NewGuid();
 
             // Act & Assert
-            var act = () => CarCategory.Create(id, CarCategoryType.Small, 100, -1);
+            var act = () => CreateCarCategoryMock(id, CarCategoryType.Small, 100, -1);
             act.Should().Throw<ArgumentException>().WithMessage("Base km price cannot be negative.");
+        }
+
+        private CarCategory CreateCarCategoryMock(Guid id, CarCategoryType carCategoryType, decimal baseDayRental, decimal baseKmPrice)
+        {
+            return CarCategory.Create(id, carCategoryType, new CarRental.Domain.Entities.CarCategory.Pricing(baseDayRental, baseKmPrice));
         }
     }
 }

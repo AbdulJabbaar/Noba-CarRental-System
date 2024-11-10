@@ -1,5 +1,5 @@
-﻿using Noba.CarRental.Domain.Entities;
-using Noba.CarRental.Domain.Repositories;
+﻿using Noba.CarRental.Application.Persistence;
+using Noba.CarRental.Domain.Entities;
 
 namespace Noba.CarRental.Persistance.Repositories
 {

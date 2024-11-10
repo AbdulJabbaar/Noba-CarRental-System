@@ -50,7 +50,7 @@ namespace Noba.CarRental.Domain.Entities
             var pricingStrategyFactory = new PricingStrategyFactory();
             var pricingStrategy = pricingStrategyFactory.GetStrategy(Car.CarCategory.CategoryType);
 
-            return pricingStrategy.CalculatePrice(Car.CarCategory.BaseDayRental, Car.CarCategory.BaseKmPrice, NumberOfDays(), NumberOfKms());
+            return pricingStrategy.CalculatePrice(Car.CarCategory.Pricing.BaseDayRental, Car.CarCategory.Pricing.BaseKmPrice, NumberOfDays(), NumberOfKms());
         }
 
         private int NumberOfDays()

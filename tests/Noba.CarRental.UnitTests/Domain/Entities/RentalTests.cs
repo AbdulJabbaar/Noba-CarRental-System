@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Noba.CarRental.Domain.Entities;
+using Noba.CarRental.Domain.Entities.CarCategory;
 using Noba.CarRental.Domain.Enums;
 
 namespace Noba.CarRental.UnitTests.Domain.Entities
@@ -111,7 +112,7 @@ namespace Noba.CarRental.UnitTests.Domain.Entities
 
         private Car MockCar()
         {
-            var carCategory = CarCategory.Create(Guid.NewGuid(), CarCategoryType.Small, 100, 50);
+            var carCategory = CarCategory.Create(Guid.NewGuid(), CarCategoryType.Small, new CarRental.Domain.Entities.CarCategory.Pricing(100, 50));
             return Car.Create(Guid.NewGuid(), "ABC123", carCategory, 1000);
         }
     }

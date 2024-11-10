@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Noba.CarRental.Application.Exceptions;
+using Noba.CarRental.Application.Persistence;
 using Noba.CarRental.Domain.Entities;
-using Noba.CarRental.Domain.UnitOfWork;
 
 namespace Noba.CarRental.Application.Features.RegisterCarPickup
 {
